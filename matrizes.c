@@ -43,7 +43,7 @@ void print_vetor(Complexo* v, int n) {
 
 //IMPLEMENTA��O DAS FUN��ES
 
-//TRANSPOSTA
+//TRANSPOSTA/
 
 Matriz* transpos_matriz(Matriz* matriz) {
    Matriz* transposta = criar_matriz(matriz->colunas, matriz->linhas);

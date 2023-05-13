@@ -32,5 +32,5 @@ Matriz *soma_matrizes(Matriz *matriz11, Matriz *matriz22);
 
 Matriz *subtracao_matrizes(Matriz *matriz33, Matriz *matriz44);
 
-//
+
 #endif // MATRIZES_H_INCLUDED
