@@ -1,26 +1,26 @@
-/// @file matrizes.h
+///@file matrizes.h
+
 #ifndef MATRIZES_H_INCLUDED
 #define MATRIZES_H_INCLUDED
 
-/**
+/** 
  * Estrutura de dados que armazena números complexos, que tem parte real e imaginaria.
- * /
+*/
+ 
 typedef struct complexo {
-   double real;
-   double imag;
+   double real;  ///< Parte real do número complexo.
+   double imag;  ///< Parte imaginaria do número complexo.
 } Complexo;
 
-/**
- * Estrutura de dados que armazena uma Matriz, as variáveis linhas​​ e colunas armazenam o número de linhas e colunas da matriz, respectivamente, e dados é um ponteiro para um ponteiro de complexo.
- * /
+/// Estrutura de dados que armazena uma Matriz, as variáveis linhas​​ e colunas armazenam o número de linhas e colunas da matriz, respectivamente, e dados é um ponteiro para um ponteiro de complexo.
 typedef struct matriz {
-   int linhas;
-   int colunas;
+   int linhas;   ///< Número de linhas da Matriz.
+   int colunas;  ///< Número de colunas da Matriz.
    Complexo **dados;
 } Matriz;
 
 
-/// Assinaturas das funções criadas no file matrizes.c .
+
 
 Matriz* transpos_matriz(Matriz* matriz);
 
