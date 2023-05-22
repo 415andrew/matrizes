@@ -1,9 +1,10 @@
+///@file main.c
 #include <stdio.h>
 #include <stdlib.h>
 #include "matrizes.h"
 #include <locale.h>
 
-
+/// Função Principal do Projeto.
 int main(){
 
     setlocale(LC_ALL,"Portuguese");
@@ -14,8 +15,10 @@ int main(){
    printf("Luan Matheus Silva dos Anjos\n");
    printf("Thiago Ferreira da Silva\n");
 
-   teste_todos();
+    /// Função teste_todos.
+    
+   teste_todos(); 
 
   return 0;
-  //
+  
 }
