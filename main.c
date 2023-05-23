@@ -16,7 +16,7 @@ int main(){
    printf("Thiago Ferreira da Silva\n");
 
     /// Função teste_todos.
-    
+    /// Essa função mostra todos os testes feitos na matrizes.c .
    teste_todos(); 
 
   return 0;
