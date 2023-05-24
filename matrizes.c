@@ -1,7 +1,15 @@
+///@file matrizes.c
 #include <stdio.h>
 #include <stdlib.h>
 #include "matrizes.h"
 
+/**
+* Cria uma matriz.
+* Esse codigo aloca memória para uma matriz n x m e retorna um ponteiro para essa matriz.
+* @param[in] n ///< Números de linhas 
+* @param[in] m ///< Números de colunas
+* @param[out] matriz 
+*/
 Matriz* criar_matriz(int n, int m) {
    Matriz* matriz = (Matriz*) malloc(sizeof(Matriz));
    matriz->linhas = n;
@@ -13,7 +21,9 @@ Matriz* criar_matriz(int n, int m) {
    return matriz;
 }
 
-
+/**
+* Imprime uma matriz de numeros complexos.
+*/
 void imprimir_matriz(Matriz* matriz) {
    for (int i = 0; i < matriz->linhas; i++) {
       for (int j = 0; j < matriz->colunas; j++) {
@@ -24,10 +34,16 @@ void imprimir_matriz(Matriz* matriz) {
    }
 }
 
+/**
+* Imprime um número complexo.
+*/
 void print_complexo(Complexo z) {
     printf("%.1f + %.1fi", z.real, z.imag);
 }
 
+/**
+* Imprime um vetor de números complexos.
+*/
 void print_vetor(Complexo* v, int n) {
   printf("[");
   for (int i = 0; i < n; i++) {
@@ -43,7 +59,11 @@ void print_vetor(Complexo* v, int n) {
 
 //IMPLEMENTA��O DAS FUN��ES
 
-//TRANSPOSTA/
+/**
+ * Calcula a transposta de uma Matriz de números complexos.
+ * @param[in] matriz
+ * @param[out] transposta
+ */
 
 Matriz* transpos_matriz(Matriz* matriz) {
    Matriz* transposta = criar_matriz(matriz->colunas, matriz->linhas);
@@ -56,7 +76,12 @@ Matriz* transpos_matriz(Matriz* matriz) {
 }
 
 
-//PRODUTO_MATRICIAL
+/**
+ * Calcula o produto matricial entre duas Matrizes de números complexos.
+ * @param[in] matriz1
+ * @param[in] matriz2
+ * @param[out] resultado
+ */
 
 Matriz* multiplicar_matrizes(Matriz* matriz1, Matriz* matriz2) {
 
@@ -85,8 +110,11 @@ Matriz* multiplicar_matrizes(Matriz* matriz1, Matriz* matriz2) {
    return resultado;
 }
 
-//CONJUGADA
-
+/**
+* Calcula a conjugada de uma Matriz de números complexos.
+* @param[in] matriz
+* @param[out] conjugada
+*/
  Matriz* conjugada_matriz(Matriz* matriz){
     Matriz* conjugada = criar_matriz(matriz->colunas, matriz->linhas);
        for (int i = 0; i < matriz->linhas; i++) {
@@ -98,16 +126,26 @@ Matriz* multiplicar_matrizes(Matriz* matriz1, Matriz* matriz2) {
    return conjugada;
 }
 
-//HERMITIANA
+/**
+ * Calcula a hermitiana de uma Matriz de números complexos.
+ * @param[in] matriz
+ * @param[out] hermitiana
+ */
 
  Matriz* hermitiana(Matriz* matriz){
-   Matriz* hermi = transpos_matriz(matriz);
+   Matriz* hermi = transpos_matriz(matriz); 
    hermi = conjugada_matriz(hermi);
    return hermi;
 
 }
 
-//PRODUTO ESCALAR
+/**
+ * Calcula o produto escalar entre dois vetores de números complexos.
+ * @param[in] v1 ///< Vetor 1.
+ * @param[in] v2 ///< Vetor 2.
+ * @param[in] n  ///< Tamanho do vetor.
+ * @param[out] escalar 
+ */
 
 Complexo produto_escalar(Complexo* v1, Complexo* v2, int n) {
   Complexo escalar = {0.0, 0.0};
@@ -120,7 +158,12 @@ Complexo produto_escalar(Complexo* v1, Complexo* v2, int n) {
   return escalar;
 }
 
-//SOMA
+/**
+ * Soma duas Matrizes de números complexos.
+ * @param[in] matriz11
+ * @param[in] matriz22
+ * @param[out] soma
+ */
 
 Matriz *soma_matrizes(Matriz *matriz11, Matriz *matriz22) {
     if (matriz11->linhas != matriz22->linhas || matriz11->colunas != matriz22->colunas) {
@@ -140,7 +183,12 @@ Matriz *soma_matrizes(Matriz *matriz11, Matriz *matriz22) {
     return soma;
 }
 
-//SUTRA��O
+/**
+ * Calcula a subtração de duas matrizes de números complexos.
+ * @param[in] matriz33
+ * @param[in] matriz44
+ * @param[out] subtração
+ */
 
 Matriz *subtracao_matrizes(Matriz *matriz33, Matriz *matriz44) {
     if (matriz33->linhas != matriz44->linhas || matriz33->colunas != matriz44->colunas) {
@@ -162,6 +210,8 @@ Matriz *subtracao_matrizes(Matriz *matriz33, Matriz *matriz44) {
 
 
     //FUN��ES_TESTE
+
+
 
 void teste_hermitiana(){
    Matriz* matriz = criar_matriz(3, 3);
@@ -368,6 +418,7 @@ void teste_subtracao(){
 
 }
 
+/// Função que testa todas as funções implementadas.
 
 void teste_todos(){
 
