@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matrizes.h"
+#include <gsl/gsl_linalg.h>
+
 
 /**
 * Cria uma matriz.
@@ -20,6 +22,19 @@ Matriz* criar_matriz(int n, int m) {
    }
    return matriz;
 }
+
+
+Matriz* criar_matriz1(int n, int m) {
+   Matriz* matriz = (Matriz*) malloc(sizeof(Matriz));
+   matriz->linhas = n;
+   matriz->colunas = m;
+   matriz->dados1 = (double**) malloc(n * sizeof(double*));
+   for (int i = 0; i < n; i++) {
+      matriz->dados1[i] = (double*) malloc(m * sizeof(double));
+   }
+   return matriz;
+}
+
 
 /**
 * Imprime uma matriz de numeros complexos.
@@ -418,6 +433,91 @@ void teste_subtracao(){
 
 }
 
+
+
+
+void calc_svd(Matriz *matriz) {
+    
+
+    Matriz *A_copy = criar_matriz1(matriz->linhas, matriz->colunas);
+    for (int i = 0; i < matriz->linhas; i++) {
+        for (int j = 0; j < matriz->colunas; j++) {
+            A_copy->dados1[i][j] = matriz->dados1[i][j];
+        }
+    }
+    
+    gsl_matrix *A1 = gsl_matrix_alloc(matriz->linhas, matriz->colunas);
+    gsl_matrix *U = gsl_matrix_alloc(matriz->linhas, matriz->colunas);
+    gsl_vector *S = gsl_vector_alloc(matriz->colunas);
+    gsl_matrix *V = gsl_matrix_alloc(matriz->colunas, matriz->colunas);
+    gsl_vector * work = gsl_vector_alloc(matriz->colunas);
+
+  for (int i = 0; i < matriz->linhas; i++) {
+        for (int j = 0; j < matriz->colunas; j++) {
+            gsl_matrix_set(A1, i, j, A_copy->dados1[i][j]);
+        }
+    }
+    
+    gsl_linalg_SV_decomp(A1, V, S, work);
+
+   
+ printf("\nMatriz A:\n");
+    for (int i = 0; i < matriz->linhas; i++) {
+        for (int j = 0; j < matriz->colunas; j++) {
+           printf("%.2lf \t", matriz->dados1[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\nMatriz U:\n");
+    for (int i = 0; i < matriz->linhas; i++) {
+        for (int j = 0; j < matriz->colunas; j++) {
+           printf("%.2lf \t", gsl_matrix_get(A1, i, j));
+        }
+        printf("\n");
+    }
+
+    printf("\nValores Singulares (S):\n");
+    for (int i = 0; i < matriz->colunas; i++) {
+        printf("%.2lf\n", gsl_vector_get(S, i));
+
+    }
+       
+
+    printf("\nMatriz V:\n");
+    for (int i = 0; i < matriz->colunas; i++) {
+        for (int j = 0; j < matriz->colunas; j++) {
+           printf("%.2lf \t", gsl_matrix_get(V, i, j));
+
+        }
+        printf("\n");
+    }
+
+    gsl_matrix_free(A1);
+    gsl_matrix_free(U);
+    gsl_vector_free(S);
+    gsl_matrix_free(V);
+    gsl_vector_free(work);
+
+}
+
+void teste_calc_svd(){
+
+  Matriz* matriz = criar_matriz1(3, 3);
+  matriz->dados1[0][0] = 2;
+  matriz->dados1[0][1] = 8;
+  matriz->dados1[0][2] = 1;
+  matriz->dados1[1][0] = 7;
+  matriz->dados1[1][1] = 5;
+  matriz->dados1[1][2] = 8;
+  matriz->dados1[2][0] = 9;
+  matriz->dados1[2][1] = 5;
+  matriz->dados1[2][2] = 6;
+
+   calc_svd(matriz);
+   
+}
+
 /// Função que testa todas as funções implementadas.
 
 void teste_todos(){
@@ -436,5 +536,6 @@ void teste_todos(){
   teste_soma();
     printf("\n====Teste da opera��o Subtra��o====\n");
   teste_subtracao();
-
+    printf("\n=====svd======\n");
+  teste_calc_svd();
 }

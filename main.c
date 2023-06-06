@@ -1,8 +1,9 @@
 ///@file main.c
-#include <stdio.h> ///informa ao main as variáveis pertencentes ao head do stdio
-#include <stdlib.h> ///informa ao main as variáveis pertencentes ao head do stdlib
-#include "matrizes.h" ///informa ao main as variáveis pertencentes ao head do matrizes
-#include <locale.h> ///informa ao main as variáveis pertencentes ao head do locale
+#include <stdio.h>
+#include <stdlib.h>
+#include "matrizes.h"
+#include <locale.h>
+#include <gsl/gsl_linalg.h>
 
 /// Função Principal do Projeto.
 int main(){
