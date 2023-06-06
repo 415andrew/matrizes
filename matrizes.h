@@ -17,6 +17,7 @@ typedef struct matriz {
    int linhas;   ///< Número de linhas da Matriz.
    int colunas;  ///< Número de colunas da Matriz.
    Complexo **dados; 
+   double **dados1;
 } Matriz;
 
 

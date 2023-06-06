@@ -1,7 +1,7 @@
 all:matrizes
 
 matrizes:matrizes.o	main.o
-		gcc	-o	matrizes	matrizes.o	main.o
+		gcc	-o	matrizes	matrizes.o	main.o	-I/usr/local/include/gsl	-I/home/gsl-2.7.1/gsl	-L/home/gsl-2.7.1/.libs	-L/home/gsl-2.7.1/cblas/.libs	-lgsl	-lgslcblas
 
 matrizes.o:matrizes.c
 		gcc	-o	matrizes.o	-c	matrizes.c	-W	-Wall	-pedantic

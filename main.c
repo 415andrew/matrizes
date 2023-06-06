@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "matrizes.h"
 #include <locale.h>
+#include <gsl/gsl_linalg.h>
 
 /// Função Principal do Projeto.
 int main(){
