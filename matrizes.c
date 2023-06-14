@@ -434,33 +434,42 @@ void teste_subtracao(){
 }
 
 
-
+/**
+ * Calcula o SVD de uma matriz.
+ * @param[in] MatrizA
+ * @param[out] MatrizU
+ * @param[out] VetorS 
+ * @param[out] MatrizV
+*/
 
 void calc_svd(Matriz *matriz) {
     
-
+/// Criação de uma copia da matriz A.
     Matriz *A_copy = criar_matriz1(matriz->linhas, matriz->colunas);
     for (int i = 0; i < matriz->linhas; i++) {
         for (int j = 0; j < matriz->colunas; j++) {
             A_copy->dados1[i][j] = matriz->dados1[i][j];
         }
     }
-    
+     
+     
     gsl_matrix *A1 = gsl_matrix_alloc(matriz->linhas, matriz->colunas);
     gsl_matrix *U = gsl_matrix_alloc(matriz->linhas, matriz->colunas);
     gsl_vector *S = gsl_vector_alloc(matriz->colunas);
     gsl_matrix *V = gsl_matrix_alloc(matriz->colunas, matriz->colunas);
     gsl_vector * work = gsl_vector_alloc(matriz->colunas);
 
+/// Adicinando os valores da copia da Matriz A para um Matriz A gsl.
   for (int i = 0; i < matriz->linhas; i++) {
         for (int j = 0; j < matriz->colunas; j++) {
             gsl_matrix_set(A1, i, j, A_copy->dados1[i][j]);
         }
     }
     
+
     gsl_linalg_SV_decomp(A1, V, S, work);
 
-   
+   /// Imprime a Matriz A.
  printf("\nMatriz A:\n");
     for (int i = 0; i < matriz->linhas; i++) {
         for (int j = 0; j < matriz->colunas; j++) {
@@ -469,6 +478,7 @@ void calc_svd(Matriz *matriz) {
         printf("\n");
     }
 
+    /// Imprime a Matriz U.
     printf("\nMatriz U:\n");
     for (int i = 0; i < matriz->linhas; i++) {
         for (int j = 0; j < matriz->colunas; j++) {
@@ -477,13 +487,14 @@ void calc_svd(Matriz *matriz) {
         printf("\n");
     }
 
+    /// Imprime a Vetor S.
     printf("\nValores Singulares (S):\n");
     for (int i = 0; i < matriz->colunas; i++) {
         printf("%.2lf\n", gsl_vector_get(S, i));
 
     }
        
-
+    /// Imprime a Matriz V.
     printf("\nMatriz V:\n");
     for (int i = 0; i < matriz->colunas; i++) {
         for (int j = 0; j < matriz->colunas; j++) {
@@ -492,7 +503,8 @@ void calc_svd(Matriz *matriz) {
         }
         printf("\n");
     }
-
+ 
+    
     gsl_matrix_free(A1);
     gsl_matrix_free(U);
     gsl_vector_free(S);
@@ -501,21 +513,77 @@ void calc_svd(Matriz *matriz) {
 
 }
 
+
 void teste_calc_svd(){
 
-  Matriz* matriz = criar_matriz1(3, 3);
+  Matriz* matriz = criar_matriz1(3, 2);
   matriz->dados1[0][0] = 2;
   matriz->dados1[0][1] = 8;
-  matriz->dados1[0][2] = 1;
   matriz->dados1[1][0] = 7;
   matriz->dados1[1][1] = 5;
-  matriz->dados1[1][2] = 8;
   matriz->dados1[2][0] = 9;
   matriz->dados1[2][1] = 5;
-  matriz->dados1[2][2] = 6;
-
+  
+printf("\n====Teste Matriz 3x2====\n");
    calc_svd(matriz);
    
+ Matriz* matriz1 = criar_matriz1(4, 4);
+  matriz1->dados1[0][0] = 2;
+  matriz1->dados1[0][1] = 8;
+  matriz1->dados1[0][2] = 1;
+  matriz1->dados1[0][3] = 3;
+  matriz1->dados1[1][0] = 7;
+  matriz1->dados1[1][1] = 5;
+  matriz1->dados1[1][2] = 8;
+  matriz1->dados1[1][3] = 2;
+  matriz1->dados1[2][0] = 9;
+  matriz1->dados1[2][1] = 5;
+  matriz1->dados1[2][2] = 7;
+  matriz1->dados1[2][3] = 10;
+  matriz1->dados1[3][0] = 6;
+  matriz1->dados1[3][1] = 11;
+  matriz1->dados1[3][2] = 7;
+  matriz1->dados1[3][3] = 8;
+
+printf("\n====Teste Matriz 4x4====\n");
+   calc_svd(matriz1);
+
+
+ Matriz* matriz2 = criar_matriz1(6, 5);
+  matriz2->dados1[0][0] = 2;
+  matriz2->dados1[0][1] = 8;
+  matriz2->dados1[0][2] = 1;
+  matriz2->dados1[0][3] = 3;
+  matriz2->dados1[0][4] = 5;
+  matriz2->dados1[1][0] = 7;
+  matriz2->dados1[1][1] = 5;
+  matriz2->dados1[1][2] = 8;
+  matriz2->dados1[1][3] = 2;
+  matriz2->dados1[1][4] = 2;
+  matriz2->dados1[2][0] = 9;
+  matriz2->dados1[2][1] = 5;
+  matriz2->dados1[2][2] = 7;
+  matriz2->dados1[2][3] = 10;
+  matriz2->dados1[2][4] = 9;
+  matriz2->dados1[3][0] = 6;
+  matriz2->dados1[3][1] = 11;
+  matriz2->dados1[3][2] = 7;
+  matriz2->dados1[3][3] = 8;
+  matriz2->dados1[3][4] = 1.1;
+  matriz2->dados1[4][0] = 2;
+  matriz2->dados1[4][1] = 8;
+  matriz2->dados1[4][2] = 1;
+  matriz2->dados1[4][3] = 3;
+  matriz2->dados1[4][4] = 5;
+  matriz2->dados1[5][0] = 3;
+  matriz2->dados1[5][1] = 9;
+  matriz2->dados1[5][2] = 2;
+  matriz2->dados1[5][3] = 2.3;
+  matriz2->dados1[5][4] = 5.9;
+
+printf("\n====Teste Matriz 6x5 ====\n");
+   calc_svd(matriz2);
+
 }
 
 /// Função que testa todas as funções implementadas.
@@ -536,6 +604,6 @@ void teste_todos(){
   teste_soma();
     printf("\n====Teste da opera��o Subtra��o====\n");
   teste_subtracao();
-    printf("\n=====svd======\n");
+    printf("\n=======svd========\n");
   teste_calc_svd();
 }

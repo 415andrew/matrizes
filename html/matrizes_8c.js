@@ -1,5 +1,6 @@
 var matrizes_8c =
 [
+    [ "calc_svd", "matrizes_8c.html#ac2f8d1e5e79e44de7000092fd3d12cdf", null ],
     [ "conjugada_matriz", "matrizes_8c.html#aead1fe8ca789de589334cd2df9fe0d7f", null ],
     [ "criar_matriz", "matrizes_8c.html#a08321868117602dd862e99da2c1a3444", null ],
     [ "hermitiana", "matrizes_8c.html#a2dddda3e5452dd3674e3b66488b43dc8", null ],
