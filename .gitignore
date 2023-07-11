@@ -3,3 +3,6 @@ html
 main.o
 matrizes.exe
 matrizes.o
+informacao_recebida.bin
+mimo.exe 
+mimo.exe.stackdump
